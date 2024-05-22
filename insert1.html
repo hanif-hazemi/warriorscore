@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Score for Nu'man</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function goBack() {
+            window.location.href = 'page1.html'; // Redirect to page1.html
+        }
+
+        function checkPassword() {
+            const passwordInput = document.getElementById('password').value;
+            const fixedPassword = '123098';
+
+            if (passwordInput === fixedPassword) {
+                document.getElementById('password-container').style.display = 'none';
+                document.getElementById('form-container').style.display = 'block';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+
+        function submitScore() {
+            const form = document.getElementById('score-form');
+            form.target = 'hidden_iframe'; // Set the target to a hidden iframe
+            form.submit(); // Submit the form
+            
+            // Redirect to page1.html after a delay
+            setTimeout(function() {
+                window.location.href = 'page1.html';
+            }, 1000); // Change delay as needed
+        }
+    </script>
+</head>
+<body>
+    <div id="password-container" class="password-container">
+        <label for="password">Enter Password:</label>
+        <input type="password" id="password" name="password">
+        <button type="submit" onclick="checkPassword()">Submit</button>
+        <button class="back-button" onclick="goBack()">Back</button>
+    </div>
+    <div id="form-container" class="form-container" style="display: none;">
+        <form id="score-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdFjagEkSSYBFtGLo0hq9Gl9XQ0L9hpbR0Jqhpzy-tTuY21gA/formResponse" method="POST" target="_blank">
+            <label for="score">Insert Score:</label>
+            <input type="number" id="score" name="entry.1063824614" required><br>
+        </form>
+        <div class="bottom-buttons">
+            <button type="button" class="green-button" onclick="submitScore()">Submit Score</button>
+            <button class="blue-button" onclick="goBack()">Back</button>
+        </div>
+        <!-- Hidden iframe for form submission -->
+        <iframe name="hidden_iframe" style="display: none;"></iframe>
+    </div>
+</body>
+</html>
